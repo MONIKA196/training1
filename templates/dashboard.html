@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI TRAINER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            AI TRAINER
+        </div>
+        <nav class="dashboard-nav">
+            <a href="#" class="nav-link active" onclick="showSection('home')">Home</a>
+            <a href="#" class="nav-link" onclick="showSection('about')">About</a>
+            <a href="#" class="nav-link" onclick="showSection('training')">Training</a>
+            <a href="#" class="nav-link" onclick="showSection('ocr')">OCR Gen</a>
+            <a href="#" class="nav-link" onclick="showSection('mcq')">MCQ Test</a>
+            <a href="#" class="nav-link" onclick="showSection('profile')">Profile</a>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-content">
+        <!-- Home Section -->
+        <div id="home-section" class="dashboard-section active">
+            <section class="welcome-section">
+                <span class="role-badge">{{ role | capitalize }}</span>
+                <h1>Hello, {{ username }}!</h1>
+                <p>Welcome to your personalized learning dashboard.</p>
+            </section>
+
+            <div class="grid-container">
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #e43abd;"><i class="fas fa-brain"></i></div>
+                    <h3>Smart Roadmap</h3>
+                    <p>Get a personalized learning path powered by AI based on your goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #8a4fff;"><i class="fas fa-file-alt"></i></div>
+                    <h3>OCR Question Gen</h3>
+                    <p>Upload study material images and get instant practice questions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #4facfe;"><i class="fas fa-tasks"></i></div>
+                    <h3>Self Assessment</h3>
+                    <p>Test your knowledge with AI-generated multiple choice questions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #00f2fe;"><i class="fas fa-user-circle"></i></div>
+                    <h3>My Profile</h3>
+                    <p>Manage your account details and view your progress.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about-section" class="dashboard-section">
+            <div class="about-card">
+                <h2>About AI TRAINER</h2>
+                <p>AI Trainer is a cutting-edge educational platform designed to empower students and trainers with
+                    artificial intelligence. Our mission is to democratize personalized learning through advanced OCR
+                    technology, smart roadmaps, and automated assessment tools.</p>
+                <p>Whether you are a student looking to master new concepts or a trainer aiming to provide better
+                    resources for your students, AI Trainer provides the tools you need to succeed in the modern digital
+                    landscape.</p>
+            </div>
+        </div>
+
+        <!-- Placeholder Sections (No Content) -->
+        <div id="training-section" class="dashboard-section">
+            <h2 style="text-align: center; margin-top: 5rem; color: var(--text-muted);">Training Section Coming Soon
+            </h2>
+        </div>
+
+        <div id="ocr-section" class="dashboard-section">
+            <h2 style="text-align: center; margin-top: 5rem; color: var(--text-muted);">OCR Generator Coming Soon</h2>
+        </div>
+
+        <div id="mcq-section" class="dashboard-section">
+            <h2 style="text-align: center; margin-top: 5rem; color: var(--text-muted);">MCQ Test Coming Soon</h2>
+        </div>
+
+        <div id="profile-section" class="dashboard-section">
+            <h2 style="text-align: center; margin-top: 5rem; color: var(--text-muted);">User Profile Coming Soon</h2>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Show the selected section
+            document.getElementById(sectionId + '-section').classList.add('active');
+
+            // Update active state in nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                link.style.color = 'var(--text-muted)';
+            });
+
+            if (window.event) {
+                window.event.preventDefault();
+                const clickedLink = window.event.currentTarget;
+                clickedLink.classList.add('active');
+                clickedLink.style.color = 'white';
+            }
+        }
+    </script>
+</body>
+
+</html>
