@@ -98,7 +98,21 @@ def register():
 def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template('dashboard.html', username=session['username'], role=session['role'])
+    
+    # Fetch complete user profile from database
+    user_profile = None
+    conn = get_db_connection()
+    if conn:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT id, username, email, role, created_at FROM users WHERE username = %s", (session['username'],))
+        user_profile = cursor.fetchone()
+        cursor.close()
+        conn.close()
+    
+    return render_template('dashboard.html', 
+                         username=session['username'], 
+                         role=session['role'],
+                         user_profile=user_profile)
 
 @app.route('/logout')
 def logout():

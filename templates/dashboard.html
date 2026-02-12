@@ -87,8 +87,96 @@
         </div>
 
         <div id="profile-section" class="dashboard-section">
-            <h2 style="text-align: center; margin-top: 5rem; color: var(--text-muted);">User Profile Coming Soon</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-header-info">
+                        <h1>{{ user_profile.username if user_profile else username }}</h1>
+                        <p class="profile-email">
+                            <i class="fas fa-envelope"></i>
+                            {{ user_profile.email if user_profile else session.email }}
+                        </p>
+                    </div>
+                    <span class="profile-role-badge">{{ (user_profile.role if user_profile else role) | capitalize
+                        }}</span>
+                </div>
+
+                <div class="profile-details-grid">
+                    <div class="profile-detail-card">
+                        <div class="detail-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Username</h3>
+                            <p>{{ user_profile.username if user_profile else username }}</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-detail-card">
+                        <div class="detail-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Email Address</h3>
+                            <p>{{ user_profile.email if user_profile else session.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-detail-card">
+                        <div class="detail-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-user-tag"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Account Type</h3>
+                            <p>{{ (user_profile.role if user_profile else role) | capitalize }}</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-detail-card">
+                        <div class="detail-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Member Since</h3>
+                            <p>{{ user_profile.created_at.strftime('%B %d, %Y') if user_profile and
+                                user_profile.created_at else 'N/A' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-detail-card">
+                        <div class="detail-icon" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h3>Account Status</h3>
+                            <p><span class="status-active"><i class="fas fa-check-circle"></i> Active</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">OCR Scans</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">MCQ Tests Taken</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Training Sessions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0%</div>
+                        <div class="stat-label">Progress</div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <script>
